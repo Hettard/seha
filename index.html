@@ -30,7 +30,6 @@
             overflow-x: hidden;
         }
 
-        /* الطبقة الرمادية الخلفية في الأعلى */
         .top-grey-banner {
             position: absolute;
             top: 0; left: 0; right: 0;
@@ -39,7 +38,7 @@
             z-index: 0;
         }
 
-        /* --- الهيدر (Header) --- */
+        /* --- الهيدر --- */
         .navbar-custom {
             display: flex;
             justify-content: space-between;
@@ -67,23 +66,15 @@
             font-size: 14.5px; 
             transition: transform 0.3s ease, color 0.3s ease; 
             display: inline-block;
-            position: relative;
         }
 
-        /* تأثير الحركة عند التمرير في الهيدر (بدون وميض) */
         .nav-link:hover {
             transform: translateY(-5px);
             color: var(--ant-primary-color-hover);
         }
 
         .navbar-left { display: flex; align-items: center; gap: 20px; }
-        .signup-link { 
-            text-decoration: none; 
-            color: var(--ant-primary-color); 
-            font-weight: 600; 
-            font-size: 14px; 
-            transition: 0.3s; 
-        }
+        .signup-link { text-decoration: none; color: var(--ant-primary-color); font-weight: 600; font-size: 14px; transition: 0.3s; }
         .signup-link:hover { color: var(--ant-primary-color-hover); }
         
         .login-btn { 
@@ -99,14 +90,10 @@
             gap: 8px; 
             transition: 0.3s; 
         }
-        .login-btn:hover { 
-            background-color: var(--ant-primary-color-hover); 
-            box-shadow: 0 4px 12px rgba(48, 109, 181, 0.2);
-        }
+        .login-btn:hover { background-color: var(--ant-primary-color-hover); box-shadow: 0 4px 12px rgba(48,109,181,0.2); }
 
-        /* القائمة الجانبية للجوال */
-        .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 2100; }
-        .menu-toggle span { width: 25px; height: 3px; background-color: var(--ant-primary-color); border-radius: 3px; }
+        .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 2100; padding: 5px; }
+        .menu-toggle span { width: 25px; height: 3px; background-color: var(--ant-primary-color); border-radius: 3px; transition: 0.3s; }
 
         /* --- المحتوى الرئيسي --- */
         .main-content {
@@ -137,17 +124,8 @@
             border-radius: 4px; z-index: -1;
         }
 
-        .sub-heading { 
-            color: var(--sub-heading-color); 
-            font-size: 17px; 
-            margin-bottom: 45px; 
-            line-height: 1.7; 
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+        .sub-heading { color: var(--sub-heading-color); font-size: 17px; margin-bottom: 45px; line-height: 1.7; max-width: 700px; margin-left: auto; margin-right: auto; }
 
-        /* --- نموذج الاستعلام --- */
         .form-container { max-width: 500px; margin: 0 auto; }
 
         .form-control {
@@ -163,7 +141,7 @@
         .btn-submit { background-color: var(--ant-primary-color); color: white; border: none; padding: 10px; border-radius: var(--radius-md); cursor: pointer; width: 160px; font-family: 'Cairo'; font-size: 14px; font-weight: 600; }
         .btn-back-main { background-color: #337ab7; color: white; border: none; padding: 10px; border-radius: var(--radius-md); cursor: pointer; width: 160px; font-family: 'Cairo'; font-size: 14px; }
 
-        /* --- بطاقة نتائج البحث (كاملة التفاصيل) --- */
+        /* --- بطاقة النتائج --- */
         .result-card {
             display: none;
             background-color: #f8f9fa;
@@ -177,62 +155,26 @@
         }
 
         .card-vertical-layout { display: flex; flex-direction: column; gap: 15px; }
-        .info-group { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 2px; 
-            padding-bottom: 12px; 
-            border-bottom: 1px solid #e9ecef; 
-        }
-        .info-group:last-child { border-bottom: none; }
+        .info-group { display: flex; flex-direction: column; gap: 2px; padding-bottom: 5px; }
         .info-label { color: #000; font-weight: 700; font-size: 16px; }
         .info-value { color: #555; font-weight: 500; font-size: 16px; min-height: 24px; }
 
         .action-buttons { display: none; flex-direction: column; align-items: center; gap: 12px; margin-top: 25px; }
-        .btn-blue-outline { 
-            background-color: #337ab7; 
-            color: white; 
-            border: none; 
-            padding: 10px 0; 
-            border-radius: 6px; 
-            width: 200px; 
-            text-align: center; 
-            text-decoration: none; 
-            font-weight: 600; 
-            font-family: 'Cairo'; 
-            cursor: pointer; 
-        }
+        .btn-blue-outline { background-color: #337ab7; color: white; border: none; padding: 10px 0; border-radius: 6px; width: 200px; text-align: center; text-decoration: none; font-weight: 600; font-family: 'Cairo'; cursor: pointer; }
 
-        /* --- الفوتر (Footer) --- */
+        /* --- الفوتر --- */
         .site-footer { background-color: var(--color-primary); color: #fff; padding: 60px 8% 40px; margin-top: 50px; }
         .footer-content { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 50px; }
         .footer-logo img { height: 50px; margin-bottom: 20px; filter: brightness(0) invert(1); }
-        .footer-title { 
-            font-size: 18px; 
-            font-weight: 700; 
-            margin-bottom: 25px; 
-            display: inline-block; 
-            border-bottom: 2px solid rgba(255,255,255,0.2); 
-            padding-bottom: 5px; 
-        }
+        .footer-title { font-size: 18px; font-weight: 700; margin-bottom: 25px; display: inline-block; border-bottom: 2px solid rgba(255,255,255,0.2); padding-bottom: 5px; }
         .footer-links { list-style: none; padding: 0; }
         .footer-links li { margin-bottom: 15px; font-size: 14px; }
-        
         .footer-link-item { color: #fff; text-decoration: none; transition: color 0.3s ease; }
-        
-        /* تغيير اللون عند التمرير في الفوتر (بدون حركة وبدون وميض) */
         .footer-link-item:hover { color: var(--color-primary-dark); }
 
         .footer-left-column { display: flex; flex-direction: column; align-items: flex-start; }
-        .custom-copyright { 
-            margin-top: 25px; 
-            font-size: 12px; 
-            opacity: 0.8; 
-            line-height: 1.8; 
-            text-align: right; 
-        }
+        .custom-copyright { margin-top: 25px; font-size: 12px; opacity: 0.8; line-height: 1.8; text-align: right; }
 
-        /* تحسينات الجوال */
         @media (max-width: 992px) {
             .menu-toggle { display: flex; }
             .nav-links-container {
@@ -281,9 +223,7 @@
 
     <main class="main-content">
         <h1 class="heading">الإجازات المرضية</h1>
-        <p class="sub-heading">
-            خدمة الاستعلام عن الإجازات المرضية تتيح لك الاستعلام عن حالة طلبك للإجازة ويمكنك طباعتها عن طريق تطبيق صحتي
-        </p>
+        <p class="sub-heading">خدمة الاستعلام عن الإجازات المرضية تتيح لك الاستعلام عن حالة طلبك للإجازة ويمكنك طباعتها عن طريق تطبيق صحتي</p>
 
         <div id="formWrapper" class="form-container">
             <form id="queryForm">
@@ -299,34 +239,13 @@
 
         <div id="resultCard" class="result-card">
             <div class="card-vertical-layout">
-                <div class="info-group">
-                    <span class="info-label">الاسم:</span>
-                    <span class="info-value" id="res-name"></span>
-                </div>
-                <div class="info-group">
-                    <span class="info-label">تاريخ إصدار تقرير الإجازة:</span>
-                    <span class="info-value" id="res-date-issue"></span>
-                </div>
-                <div class="info-group">
-                    <span class="info-label">تبدأ من:</span>
-                    <span class="info-value" id="res-start"></span>
-                </div>
-                <div class="info-group">
-                    <span class="info-label">وحتى:</span>
-                    <span class="info-value" id="res-end"></span>
-                </div>
-                <div class="info-group">
-                    <span class="info-label">المدة بالأيام:</span>
-                    <span class="info-value" id="res-duration"></span>
-                </div>
-                <div class="info-group">
-                    <span class="info-label">اسم الطبيب:</span>
-                    <span class="info-value" id="res-doctor"></span>
-                </div>
-                <div class="info-group">
-                    <span class="info-label">المسمى الوظيفي:</span>
-                    <span class="info-value" id="res-job"></span>
-                </div>
+                <div class="info-group"><span class="info-label">الاسم:</span><span class="info-value" id="res-name"></span></div>
+                <div class="info-group"><span class="info-label">تاريخ إصدار تقرير الإجازة:</span><span class="info-value" id="res-date-issue"></span></div>
+                <div class="info-group"><span class="info-label">تبدأ من:</span><span class="info-value" id="res-start"></span></div>
+                <div class="info-group"><span class="info-label">وحتى:</span><span class="info-value" id="res-end"></span></div>
+                <div class="info-group"><span class="info-label">المدة بالأيام:</span><span class="info-value" id="res-duration"></span></div>
+                <div class="info-group"><span class="info-label">اسم الطبيب:</span><span class="info-value" id="res-doctor"></span></div>
+                <div class="info-group"><span class="info-label">المسمى الوظيفي:</span><span class="info-value" id="res-job"></span></div>
             </div>
         </div>
 
@@ -338,14 +257,9 @@
     <footer class="site-footer">
         <div class="footer-content">
             <div>
-                <div class="footer-logo">
-                    <img src="https://www.seha.sa/assets/logo-white-CKxLEirV.svg" alt="Seha">
-                </div>
-                <p style="font-size: 14px; line-height: 1.8; opacity: 0.9;">
-                    منصة صحة تخدم جميع المنشأت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشأت الطبية وتسعى إلى توحيد وأتمتة الاجراءات والخدمات بما في دوره رفع جودة الاداء وخفض التكاليف.
-                </p>
+                <div class="footer-logo"><img src="https://www.seha.sa/assets/logo-white-CKxLEirV.svg" alt="Seha"></div>
+                <p style="font-size: 14px; line-height: 1.8; opacity: 0.9;">منصة صحة تخدم جميع المنشأت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشأت الطبية وتسعى إلى توحيد وأتمتة الاجراءات والخدمات بما في دوره رفع جودة الاداء وخفض التكاليف.</p>
             </div>
-
             <div>
                 <span class="footer-title">القائمة الرئيسية</span>
                 <ul class="footer-links">
@@ -355,12 +269,10 @@
                     <li>- <a href="https://www.seha.sa/ui#/ContactUs" class="footer-link-item">تواصل معنا</a></li>
                 </ul>
             </div>
-
             <div class="footer-left-column">
                 <span class="footer-title">تواصل معنا</span>
                 <div style="margin-bottom: 12px; font-weight: 500;">📞 920002005</div>
                 <div style="margin-bottom: 12px; font-weight: 500;">✉️ support@seha.sa</div>
-                
                 <div style="display: flex; gap: 15px; margin-top: 20px;">
                     <a href="https://x.com/seha_services" target="_blank">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.045 4.126H5.078z"/></svg>
@@ -369,11 +281,7 @@
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                     </a>
                 </div>
-
-                <div class="custom-copyright">
-                    منصة صحة معتمدة من قبل وزارة الصحة © 2026<br>
-                    سياسة الخصوصية وشروط الاستخدام | دليل الاستخدام
-                </div>
+                <div class="custom-copyright">منصة صحة معتمدة من قبل وزارة الصحة © 2026<br>سياسة الخصوصية وشروط الاستخدام | دليل الاستخدام</div>
             </div>
         </div>
     </footer>
@@ -386,31 +294,20 @@
             const form = document.getElementById('queryForm');
             const submitBtn = document.getElementById('submitBtn');
 
-            // منع إدخال غير الأرقام في الهوية
-            idInput.addEventListener('input', function() {
-                this.value = this.value.replace(/[^0-9]/g, '');
-            });
+            idInput.addEventListener('input', function() { this.value = this.value.replace(/[^0-9]/g, ''); });
+            menuToggle.addEventListener('click', () => { navLinks.classList.toggle('active'); });
 
-            // قائمة الجوال
-            menuToggle.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-            });
-
-            // معالجة الاستعلام
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
-                const codeValue = document.getElementById('serviceCode').value.trim();
-                const idValue = idInput.value.trim();
-
                 submitBtn.disabled = true;
                 submitBtn.innerText = 'جاري البحث...';
 
                 setTimeout(() => {
+                    const code = document.getElementById('serviceCode').value.trim();
+                    const id = idInput.value.trim();
                     document.getElementById('formWrapper').style.display = 'none';
-                    const resultCard = document.getElementById('resultCard');
                     
-                    // التحقق من البيانات المطلوبة
-                    if (codeValue === "GSL25050755014" && idValue === "1134148921") {
+                    if (code === "GSL25050755014" && id === "1134148921") {
                         document.getElementById('res-name').innerText = "عبدالرحمن بن عطيه الزهراني";
                         document.getElementById('res-date-issue').innerText = "2026-01-19";
                         document.getElementById('res-start').innerText = "2026-01-19";
@@ -419,7 +316,6 @@
                         document.getElementById('res-doctor').innerText = "خالد عالي بركي";
                         document.getElementById('res-job').innerText = "اخصائي";
                     } else {
-                        // حالة عدم وجود بيانات
                         document.getElementById('res-name').innerText = "لا توجد بيانات متاحة لهذا الاستعلام";
                         document.getElementById('res-date-issue').innerText = "-";
                         document.getElementById('res-start').innerText = "-";
@@ -428,8 +324,7 @@
                         document.getElementById('res-doctor').innerText = "-";
                         document.getElementById('res-job').innerText = "-";
                     }
-
-                    resultCard.style.display = 'block';
+                    document.getElementById('resultCard').style.display = 'block';
                     document.getElementById('actionButtons').style.display = 'flex';
                     window.scrollTo({top: 0, behavior: 'smooth'});
                 }, 1000);
