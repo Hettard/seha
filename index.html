@@ -90,10 +90,18 @@
             gap: 8px; 
             transition: 0.3s; 
         }
-        .login-btn:hover { background-color: var(--ant-primary-color-hover); box-shadow: 0 4px 12px rgba(48,109,181,0.2); }
+
+        /* طبقة التعتيم عند فتح المنيو في الجوال */
+        #menuOverlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 1400;
+        }
 
         .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 2100; padding: 5px; }
-        .menu-toggle span { width: 25px; height: 3px; background-color: var(--ant-primary-color); border-radius: 3px; transition: 0.3s; }
+        .menu-toggle span { width: 25px; height: 3px; background-color: var(--ant-primary-color); border-radius: 3px; }
 
         /* --- المحتوى الرئيسي --- */
         .main-content {
@@ -124,20 +132,16 @@
             border-radius: 4px; z-index: -1;
         }
 
-        .sub-heading { color: var(--sub-heading-color); font-size: 17px; margin-bottom: 45px; line-height: 1.7; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .sub-heading { color: var(--sub-heading-color); font-size: 17px; margin-bottom: 45px; line-height: 1.7; }
 
         .form-container { max-width: 500px; margin: 0 auto; }
-
         .form-control {
             display: block; width: 100%; padding: 12px 15px; 
             font-size: 1rem; border: 1px solid var(--bs-border-color); 
             border-radius: var(--radius-md); margin-bottom: 20px; 
             text-align: right; font-family: 'Cairo'; box-sizing: border-box;
-            transition: border-color 0.3s;
         }
-        .form-control:focus { outline: none; border-color: var(--ant-primary-color); }
 
-        .button-wrapper { display: flex; flex-direction: column; align-items: center; gap: 17px; }
         .btn-submit { background-color: var(--ant-primary-color); color: white; border: none; padding: 10px; border-radius: var(--radius-md); cursor: pointer; width: 160px; font-family: 'Cairo'; font-size: 14px; font-weight: 600; }
         .btn-back-main { background-color: #337ab7; color: white; border: none; padding: 10px; border-radius: var(--radius-md); cursor: pointer; width: 160px; font-family: 'Cairo'; font-size: 14px; }
 
@@ -150,17 +154,11 @@
             padding: 30px;
             margin: 30px auto;
             max-width: 550px;
-            text-align: center;
-            animation: fadeIn 0.5s ease;
         }
 
-        .card-vertical-layout { display: flex; flex-direction: column; gap: 15px; }
         .info-group { display: flex; flex-direction: column; gap: 2px; padding-bottom: 5px; }
         .info-label { color: #000; font-weight: 700; font-size: 16px; }
-        .info-value { color: #555; font-weight: 500; font-size: 16px; min-height: 24px; }
-
-        .action-buttons { display: none; flex-direction: column; align-items: center; gap: 12px; margin-top: 25px; }
-        .btn-blue-outline { background-color: #337ab7; color: white; border: none; padding: 10px 0; border-radius: 6px; width: 200px; text-align: center; text-decoration: none; font-weight: 600; font-family: 'Cairo'; cursor: pointer; }
+        .info-value { color: #555; font-weight: 500; font-size: 16px; }
 
         /* --- الفوتر --- */
         .site-footer { background-color: var(--color-primary); color: #fff; padding: 60px 8% 40px; margin-top: 50px; }
@@ -169,38 +167,27 @@
         .footer-title { font-size: 18px; font-weight: 700; margin-bottom: 25px; display: inline-block; border-bottom: 2px solid rgba(255,255,255,0.2); padding-bottom: 5px; }
         .footer-links { list-style: none; padding: 0; }
         .footer-links li { margin-bottom: 15px; font-size: 14px; }
-        .footer-link-item { color: #fff; text-decoration: none; transition: color 0.3s ease; }
-        .footer-link-item:hover { color: var(--color-primary-dark); }
-
-        .footer-left-column { display: flex; flex-direction: column; align-items: flex-start; }
+        .footer-link-item { color: #fff; text-decoration: none; }
         
         .work-hours { margin-top: 20px; font-size: 14px; opacity: 0.9; }
 
-        .partner-logos { 
-            display: flex; 
-            align-items: center; 
-            gap: 20px; 
-            margin-top: 20px;
-        }
-        .partner-logos img { 
-            height: 40px; 
-            filter: brightness(0) invert(1); 
-            opacity: 0.9;
-        }
+        .partner-logos { display: flex; align-items: center; gap: 20px; margin-top: 20px; }
+        .partner-logos img { height: 40px; filter: brightness(0) invert(1); opacity: 0.9; }
 
         .custom-copyright { margin-top: 25px; font-size: 12px; opacity: 0.8; line-height: 1.8; text-align: right; }
 
+        /* إعدادات الجوال */
         @media (max-width: 992px) {
             .menu-toggle { display: flex; }
             .nav-links-container {
-                position: fixed; top: 0; right: -100%; width: 260px; height: 100vh;
+                position: fixed; top: 0; right: -280px; width: 260px; height: 100vh;
                 background-color: #fff; flex-direction: column; padding: 100px 30px;
                 box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 1500; align-items: flex-start;
+                transition: 0.3s ease;
             }
             .nav-links-container.active { right: 0; }
             .navbar-left { display: none; }
-            .footer-content { grid-template-columns: 1fr; text-align: center; gap: 40px; }
-            .footer-left-column { align-items: center; }
+            .footer-content { grid-template-columns: 1fr; text-align: center; }
             .partner-logos { justify-content: center; }
             .custom-copyright { text-align: center; }
         }
@@ -210,6 +197,7 @@
 </head>
 <body>
 
+    <div id="menuOverlay"></div>
     <div class="top-grey-banner"></div>
 
     <nav class="navbar-custom">
@@ -226,10 +214,7 @@
 
         <div class="navbar-left">
             <a href="https://www.seha.sa/ui#/account/signup" class="signup-link" style="margin-left: 15px;">إنشاء حساب</a>
-            <a href="https://www.seha.sa/ui#/account/login" class="login-btn">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                &nbsp;تسجيل الدخول
-            </a>
+            <a href="https://www.seha.sa/ui#/account/login" class="login-btn">تسجيل الدخول</a>
         </div>
 
         <div class="menu-toggle" id="mobileMenu">
@@ -245,8 +230,7 @@
             <form id="queryForm">
                 <input type="text" id="serviceCode" class="form-control" placeholder="رمز الخدمة" maxlength="14" required>
                 <input type="text" id="idNumber" class="form-control" placeholder="رقم الهوية / الإقامة" maxlength="10" inputmode="numeric" required>
-                
-                <div class="button-wrapper">
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 17px;">
                     <button type="submit" class="btn-submit" id="submitBtn">استعلام</button>
                     <button type="button" class="btn-back-main" onclick="location.reload()">رجوع للاستعلامات</button>
                 </div>
@@ -254,7 +238,7 @@
         </div>
 
         <div id="resultCard" class="result-card">
-            <div class="card-vertical-layout">
+            <div style="display: flex; flex-direction: column; gap: 15px;">
                 <div class="info-group"><span class="info-label">الاسم:</span><span class="info-value" id="res-name"></span></div>
                 <div class="info-group"><span class="info-label">تاريخ إصدار تقرير الإجازة:</span><span class="info-value" id="res-date-issue"></span></div>
                 <div class="info-group"><span class="info-label">تبدأ من:</span><span class="info-value" id="res-start"></span></div>
@@ -264,95 +248,76 @@
                 <div class="info-group"><span class="info-label">المسمى الوظيفي:</span><span class="info-value" id="res-job"></span></div>
             </div>
         </div>
-
-        <div id="actionButtons" class="action-buttons">
-            <button class="btn-blue-outline" onclick="location.reload()">استعلام جديد</button>
-        </div>
     </main>
 
     <footer class="site-footer">
         <div class="footer-content">
             <div>
                 <div class="footer-logo"><img src="https://www.seha.sa/assets/logo-white-CKxLEirV.svg" alt="Seha"></div>
-                <p style="font-size: 14px; line-height: 1.8; opacity: 0.9;">منصة صحة تخدم جميع المنشأت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشأت الطبية وتسعى إلى توحيد وأتمتة الاجراءات والخدمات بما في دوره رفع جودة الاداء وخفض التكاليف.</p>
+                <p style="font-size: 14px; line-height: 1.8; opacity: 0.9;">منصة صحة تخدم جميع المنشأت الطبية وتسعى إلى توحيد وأتمتة الاجراءات والخدمات.</p>
             </div>
             <div>
                 <span class="footer-title">القائمة الرئيسية</span>
                 <ul class="footer-links">
-                    <li>- <a href="https://www.seha.sa/ui#/services" class="footer-link-item">الخدمات</a></li>
-                    <li>- <a href="https://www.seha.sa/ui#/inquiries" class="footer-link-item">الاستعلامات</a></li>
-                    <li>- <a href="https://www.seha.sa/ui#/faq" class="footer-link-item">الأسئلة الشائعة</a></li>
-                    <li>- <a href="https://www.seha.sa/ui#/ContactUs" class="footer-link-item">تواصل معنا</a></li>
+                    <li>- <a href="#" class="footer-link-item">الخدمات</a></li>
+                    <li>- <a href="#" class="footer-link-item">الاستعلامات</a></li>
                 </ul>
             </div>
             <div class="footer-left-column">
                 <span class="footer-title">تواصل معنا</span>
-                <div style="margin-bottom: 12px; font-weight: 500;">📞 920002005</div>
-                <div style="margin-bottom: 12px; font-weight: 500;">✉️ support@seha.sa</div>
-                
+                <div style="margin-bottom: 12px;">📞 920002005</div>
                 <div class="work-hours">أوقات العمل: الأحد حتى الخميس 8 ص - 11م</div>
-
-                <div style="display: flex; gap: 15px; margin-top: 10px;">
-                    <a href="https://x.com/seha_services" target="_blank">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.045 4.126H5.078z"/></svg>
-                    </a>
-                    <a href="https://www.youtube.com/channel/UCb9ZrS2YcriYqIPIHNp9wcQ" target="_blank">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                    </a>
-                </div>
-
                 <div class="partner-logos">
                     <img src="https://www.seha.sa/assets/lean-logo-De0NEeoI.svg" alt="لين">
                     <img src="https://www.seha.sa/assets/MOH-logo-DYiHZCSg.svg" alt="وزارة الصحة">
                 </div>
-
-                <div class="custom-copyright">منصة صحة معتمدة من قبل وزارة الصحة © 2026<br>سياسة الخصوصية وشروط الاستخدام | دليل الاستخدام</div>
+                <div class="custom-copyright">منصة صحة معتمدة © 2026</div>
             </div>
         </div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const idInput = document.getElementById('idNumber');
             const menuToggle = document.getElementById('mobileMenu');
             const navLinks = document.getElementById('navLinks');
+            const menuOverlay = document.getElementById('menuOverlay');
+            const allLinks = document.querySelectorAll('.nav-link');
+
+            // وظيفة الفتح والإغلاق
+            function toggleMenu() {
+                const isActive = navLinks.classList.toggle('active');
+                menuOverlay.style.display = isActive ? 'block' : 'none';
+            }
+
+            // فتح المنيو عند الضغط على الخطوط
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleMenu();
+            });
+
+            // إغلاق المنيو عند الضغط على الهامش (التعتيم)
+            menuOverlay.addEventListener('click', toggleMenu);
+
+            // إغلاق المنيو عند الضغط على أي رابط بداخلها
+            allLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) toggleMenu();
+                });
+            });
+
+            // كود الاستعلام (الاسم والرقم)
             const form = document.getElementById('queryForm');
-            const submitBtn = document.getElementById('submitBtn');
-
-            idInput.addEventListener('input', function() { this.value = this.value.replace(/[^0-9]/g, ''); });
-            menuToggle.addEventListener('click', () => { navLinks.classList.toggle('active'); });
-
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
-                submitBtn.disabled = true;
-                submitBtn.innerText = 'جاري البحث...';
-
-                setTimeout(() => {
-                    const code = document.getElementById('serviceCode').value.trim();
-                    const id = idInput.value.trim();
-                    document.getElementById('formWrapper').style.display = 'none';
-                    
-                    if (code === "GSL25050755014" && id === "1134148921") {
-                        document.getElementById('res-name').innerText = "عبدالرحمن بن عطيه الزهراني";
-                        document.getElementById('res-date-issue').innerText = "2026-01-19";
-                        document.getElementById('res-start').innerText = "2026-01-19";
-                        document.getElementById('res-end').innerText = "2026-02-18";
-                        document.getElementById('res-duration').innerText = "30";
-                        document.getElementById('res-doctor').innerText = "خالد عالي بركي";
-                        document.getElementById('res-job').innerText = "اخصائي";
-                    } else {
-                        document.getElementById('res-name').innerText = "لا توجد بيانات متاحة لهذا الاستعلام";
-                        document.getElementById('res-date-issue').innerText = "-";
-                        document.getElementById('res-start').innerText = "-";
-                        document.getElementById('res-end').innerText = "-";
-                        document.getElementById('res-duration').innerText = "-";
-                        document.getElementById('res-doctor').innerText = "-";
-                        document.getElementById('res-job').innerText = "-";
-                    }
-                    document.getElementById('resultCard').style.display = 'block';
-                    document.getElementById('actionButtons').style.display = 'flex';
-                    window.scrollTo({top: 0, behavior: 'smooth'});
-                }, 1000);
+                document.getElementById('formWrapper').style.display = 'none';
+                document.getElementById('res-name').innerText = "عبدالرحمن بن عطيه الزهراني";
+                document.getElementById('res-date-issue').innerText = "2026-01-19";
+                document.getElementById('res-start').innerText = "2026-01-19";
+                document.getElementById('res-end').innerText = "2026-02-18";
+                document.getElementById('res-duration').innerText = "30";
+                document.getElementById('res-doctor').innerText = "خالد عالي بركي";
+                document.getElementById('res-job').innerText = "اخصائي";
+                document.getElementById('resultCard').style.display = 'block';
             });
         });
     </script>
