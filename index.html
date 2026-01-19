@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>منصة صحة - الإجازات المرضية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ant-primary-color: rgb(48, 109, 181);
+            --ant-primary-color-hover: #538bc2;
+            --ant-primary-color-active: #1f508f;
+            --color-primary: #306db5;
+            --color-primary-dark: #2c3e77;
+            --sub-heading-color: #828c97;
+            --radius-md: 6px;
+            --radius-lg: 8px;
+            --bs-body-color: #212529;
+            --bs-border-color: #dee2e6;
+            --error-bg: #fff2f0;
+            --error-border: #ffccc7;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Cairo", sans-serif;
+            background-color: #ffffff;
+            color: var(--bs-body-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            line-height: 1.5;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .top-grey-banner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 125px; 
+            background-color: #f7f7f7; 
+            z-index: 0;
+        }
+
+        /* --- الهيدر --- */
+        .navbar-custom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 4%;
+            background-color: transparent; 
+            height: 80px;
+            position: relative;
+            z-index: 2000;
+        }
+
+        .navbar-right { display: flex; align-items: center; gap: 25px; }
+        .logo { height: 45px; z-index: 2100; }
+        
+        .nav-links-container {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            transition: 0.4s ease-in-out;
+        }
+
+        .nav-link { 
+            text-decoration: none; 
+            color: var(--ant-primary-color); 
+            font-weight: 600; 
+            font-size: 14.5px; 
+            transition: 0.2s; 
+            position: relative; 
+            padding-bottom: 5px;
+        }
+
+        .nav-link.active::after { 
+            content: ""; 
+            position: absolute; 
+            bottom: -1px; 
+            right: 0; 
+            width: 100%; 
+            height: 3px; 
+            background-color: var(--ant-primary-color); 
+        }
+
+        .navbar-left { display: flex; align-items: center; gap: 20px; }
+        .signup-link { text-decoration: none; color: var(--ant-primary-color); font-weight: 600; font-size: 14px; }
+        
+        .login-btn { 
+            background-color: var(--ant-primary-color); 
+            color: #fff; 
+            padding: 10px 24px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            font-size: 14px; 
+            font-weight: 600; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            transition: 0.3s; 
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 2100;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--ant-primary-color);
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        /* --- المحتوى الرئيسي --- */
+        .main-content {
+            flex: 1;
+            max-width: 900px;
+            margin: 80px auto;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .heading {
+            color: var(--ant-primary-color);
+            font-size: 38px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .heading::before {
+            content: "";
+            position: absolute;
+            top: 48%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 72%;
+            height: 19px;
+            background-color: rgba(48, 109, 181, 0.1);
+            border-radius: 4px;
+            z-index: -1;
+        }
+
+        .sub-heading { color: var(--sub-heading-color); font-size: 17px; margin-bottom: 45px; line-height: 1.7; }
+
+        .form-container { max-width: 500px; margin: 0 auto; }
+
+        .form-control {
+            display: block; width: 100%; padding: 12px 15px; 
+            font-size: 1rem; border: 1px solid var(--bs-border-color); 
+            border-radius: var(--radius-md); margin-bottom: 20px; 
+            text-align: right; font-family: 'Cairo'; box-sizing: border-box;
+        }
+
+        #errorMessage {
+            display: none;
+            background-color: var(--error-bg);
+            border: 1px solid var(--error-border);
+            color: #ff4d4f;
+            padding: 10px;
+            border-radius: var(--radius-md);
+            margin-bottom: 15px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .button-wrapper { display: flex; flex-direction: column; align-items: center; gap: 17px; }
+        .btn-submit { background-color: var(--ant-primary-color); color: white; border: none; padding: 10px; border-radius: var(--radius-md); cursor: pointer; width: 160px; font-family: 'Cairo'; font-size: 14px; }
+        .btn-back-main { background-color: #337ab7; color: white; border: none; padding: 10px; border-radius: var(--radius-md); cursor: pointer; width: 160px; font-family: 'Cairo'; font-size: 14px; }
+
+        /* --- بطاقة النتائج المحدثة (في المنتصف وبدون خطوط) --- */
+        .result-card {
+            display: none;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 550px;
+            text-align: center; /* توسيط النص */
+            animation: fadeIn 0.5s ease;
+        }
+
+        .card-vertical-layout { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px; 
+        }
+
+        .info-group { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 2px; 
+            padding-bottom: 5px;
+            border: none; /* إزالة الخطوط تماماً */
+        }
+
+        .info-label { color: #000; font-weight: 700; font-size: 16px; }
+        .info-value { color: #555; font-weight: 500; font-size: 16px; }
+
+        .action-buttons { display: none; flex-direction: column; align-items: center; gap: 12px; margin-top: 25px; }
+        .btn-blue-outline { background-color: #337ab7; color: white; border: none; padding: 10px 0; border-radius: 6px; width: 200px; text-align: center; text-decoration: none; font-weight: 600; font-family: 'Cairo'; }
+
+        /* --- الفوتر --- */
+        .site-footer { background-color: var(--color-primary); color: #fff; padding: 60px 8% 40px; margin-top: 50px; }
+        .footer-content { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 50px; }
+        .footer-logo img { height: 50px; margin-bottom: 20px; filter: brightness(0) invert(1); }
+        .footer-title { font-size: 18px; font-weight: 700; margin-bottom: 25px; display: inline-block; border-bottom: 2px solid rgba(255,255,255,0.2); padding-bottom: 5px; }
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 15px; font-size: 14px; }
+        .footer-links a { color: inherit; text-decoration: none; }
+        .footer-left-column { display: flex; flex-direction: column; align-items: flex-start; }
+        .custom-copyright { margin-top: 25px; font-size: 12px; opacity: 0.8; line-height: 1.8; text-align: right; }
+
+        @media (max-width: 992px) {
+            .menu-toggle { display: flex; }
+            .nav-links-container {
+                position: fixed; top: 0; right: -100%; width: 250px; height: 100vh;
+                background-color: #fff; flex-direction: column; padding: 100px 30px;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 1500; align-items: flex-start;
+            }
+            .nav-links-container.active { right: 0; }
+            .navbar-left { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            .footer-content { grid-template-columns: 1fr; gap: 30px; }
+            .heading { font-size: 28px; }
+            .footer-left-column { align-items: center; }
+            .custom-copyright { text-align: center; }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="top-grey-banner"></div>
+
+    <nav class="navbar-custom">
+        <div class="navbar-right">
+            <img src="https://www.seha.sa/assets/seha_logo-m9JsokyV.svg" alt="Seha" class="logo">
+            <div class="nav-links-container" id="navLinks">
+                <a href="#" class="nav-link active">الرئيسية</a>
+                <a href="https://www.seha.sa/ui#/services" class="nav-link">الخدمات</a>
+                <a href="#" class="nav-link">الاستعلامات</a>
+                <a href="#" class="nav-link">الأسئلة الشائعة</a>
+                <a href="#" class="nav-link">تواصل معنا</a>
+            </div>
+        </div>
+
+        <div class="navbar-left">
+            <a href="#" class="signup-link" style="margin-left: 15px;">إنشاء حساب</a>
+            <a href="#" class="login-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                &nbsp;تسجيل الدخول
+            </a>
+        </div>
+
+        <div class="menu-toggle" id="mobileMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <h1 class="heading">الإجازات المرضية</h1>
+        <p class="sub-heading">
+            خدمة الاستعلام عن الإجازات المرضية تتيح لك الاستعلام عن حالة طلبك للإجازة ويمكنك طباعتها عن طريق تطبيق صحتي
+        </p>
+
+        <div id="formWrapper" class="form-container">
+            <form id="queryForm">
+                <div id="errorMessage">رمز الخدمة أو رقم الهوية غير صحيح.</div>
+                <input type="text" id="serviceCode" class="form-control" placeholder="رمز الخدمة" required>
+                <input type="text" id="idNumber" class="form-control" placeholder="رقم الهوية / الإقامة" required>
+                
+                <div class="button-wrapper">
+                    <button type="submit" class="btn-submit" id="submitBtn">استعلام</button>
+                    <button type="button" class="btn-back-main" onclick="location.reload()">رجوع للاستعلامات</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="resultCard" class="result-card">
+            <div class="card-vertical-layout">
+                <div class="info-group">
+                    <span class="info-label">الاسم:</span>
+                    <span class="info-value">عبدالرحمن بن عطيه الزهراني</span>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">تاريخ إصدار تقرير الإجازة:</span>
+                    <span class="info-value">2026-01-19</span>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">تبدأ من:</span>
+                    <span class="info-value">2026-01-19</span>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">وحتى:</span>
+                    <span class="info-value">2026-02-18</span>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">المدة بالأيام:</span>
+                    <span class="info-value">30</span>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">اسم الطبيب:</span>
+                    <span class="info-value">خالد عالي بركي</span>
+                </div>
+                <div class="info-group">
+                    <span class="info-label">المسمى الوظيفي:</span>
+                    <span class="info-value">اخصائي</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="actionButtons" class="action-buttons">
+            <button class="btn-blue-outline" onclick="location.reload()">استعلام جديد</button>
+            <button class="btn-blue-outline" onclick="location.reload()">رجوع للاستعلامات</button>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div>
+                <div class="footer-logo"><img src="https://www.seha.sa/assets/logo-white-CKxLEirV.svg" alt="Seha"></div>
+                <p style="line-height: 1.8; font-size: 14px;">
+                    منصة صحة تخدم جميع المنشأت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشأت الطبية وتسعى إلى توحيد وأتمتة الاجراءات والخدمات بما في دوره رفع جودة الاداء وخفض التكاليف.
+                </p>
+            </div>
+
+            <div>
+                <span class="footer-title">القائمة الرئيسية</span>
+                <ul class="footer-links">
+                    <li>- <a href="https://www.seha.sa/ui#/services">الخدمات</a></li>
+                    <li>- الاستعلامات</li>
+                    <li>- الأسئلة الشائعة</li>
+                    <li>- تواصل معنا</li>
+                </ul>
+            </div>
+
+            <div class="footer-left-column">
+                <span class="footer-title">تواصل معنا</span>
+                <div style="margin-bottom: 10px;">📞 920002005</div>
+                <div style="margin-bottom: 10px;">✉️ support@seha.sa</div>
+                
+                <div style="display: flex; gap: 15px; margin-top: 15px;">
+                    <a href="https://x.com/seha_services" target="_blank">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.045 4.126H5.078z"/></svg>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCb9ZrS2YcriYqIPIHNp9wcQ" target="_blank">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
+                </div>
+
+                <div class="custom-copyright">
+                    <span>منصة صحة معتمدة من قبل وزارة الصحة © 2026</span>
+                    <span>سياسة الخصوصية وشروط الاستخدام | دليل الاستخدام</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('mobileMenu');
+            const navLinks = document.getElementById('navLinks');
+
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                const spans = menuToggle.querySelectorAll('span');
+                spans[0].style.transform = navLinks.classList.contains('active') ? 'rotate(45deg) translate(5px, 6px)' : 'none';
+                spans[1].style.opacity = navLinks.classList.contains('active') ? '0' : '1';
+                spans[2].style.transform = navLinks.classList.contains('active') ? 'rotate(-45deg) translate(5px, -6px)' : 'none';
+            });
+
+            const form = document.getElementById('queryForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            const correctServiceCode = "GSL25050755014";
+            const correctIdNumber = "1134148921";
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const codeValue = document.getElementById('serviceCode').value.trim();
+                const idValue = document.getElementById('idNumber').value.trim();
+
+                if (codeValue === correctServiceCode && idValue === correctIdNumber) {
+                    errorMessage.style.display = 'none';
+                    submitBtn.disabled = true;
+                    submitBtn.innerText = 'جاري البحث...';
+
+                    setTimeout(() => {
+                        document.getElementById('formWrapper').style.display = 'none';
+                        document.getElementById('resultCard').style.display = 'block';
+                        document.getElementById('actionButtons').style.display = 'flex';
+                        window.scrollTo({top: 0, behavior: 'smooth'});
+                    }, 1200);
+                } else {
+                    errorMessage.style.display = 'block';
+                    window.scrollTo({top: 0, behavior: 'smooth'});
+                }
+            });
+        });
+    </script>
+</body>
+</html>
