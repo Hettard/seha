@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>منصة صحة - الإجازات المرضية</title>
+    <title>صحة - منصة الخدمات الصحية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -164,23 +164,11 @@
             text-align: right; font-family: 'Cairo'; box-sizing: border-box;
         }
 
-        #errorMessage {
-            display: none;
-            background-color: var(--error-bg);
-            border: 1px solid var(--error-border);
-            color: #ff4d4f;
-            padding: 10px;
-            border-radius: var(--radius-md);
-            margin-bottom: 15px;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
         .button-wrapper { display: flex; flex-direction: column; align-items: center; gap: 17px; }
         .btn-submit { background-color: var(--ant-primary-color); color: white; border: none; padding: 10px; border-radius: var(--radius-md); cursor: pointer; width: 160px; font-family: 'Cairo'; font-size: 14px; }
         .btn-back-main { background-color: #337ab7; color: white; border: none; padding: 10px; border-radius: var(--radius-md); cursor: pointer; width: 160px; font-family: 'Cairo'; font-size: 14px; }
 
-        /* --- بطاقة النتائج المحدثة (في المنتصف وبدون خطوط) --- */
+        /* --- بطاقة النتائج --- */
         .result-card {
             display: none;
             background-color: #f8f9fa;
@@ -189,7 +177,7 @@
             padding: 30px;
             margin: 30px auto;
             max-width: 550px;
-            text-align: center; /* توسيط النص */
+            text-align: center;
             animation: fadeIn 0.5s ease;
         }
 
@@ -204,14 +192,13 @@
             flex-direction: column; 
             gap: 2px; 
             padding-bottom: 5px;
-            border: none; /* إزالة الخطوط تماماً */
         }
 
         .info-label { color: #000; font-weight: 700; font-size: 16px; }
-        .info-value { color: #555; font-weight: 500; font-size: 16px; }
+        .info-value { color: #555; font-weight: 500; font-size: 16px; min-height: 24px; }
 
         .action-buttons { display: none; flex-direction: column; align-items: center; gap: 12px; margin-top: 25px; }
-        .btn-blue-outline { background-color: #337ab7; color: white; border: none; padding: 10px 0; border-radius: 6px; width: 200px; text-align: center; text-decoration: none; font-weight: 600; font-family: 'Cairo'; }
+        .btn-blue-outline { background-color: #337ab7; color: white; border: none; padding: 10px 0; border-radius: 6px; width: 200px; text-align: center; text-decoration: none; font-weight: 600; font-family: 'Cairo'; cursor: pointer; }
 
         /* --- الفوتر --- */
         .site-footer { background-color: var(--color-primary); color: #fff; padding: 60px 8% 40px; margin-top: 50px; }
@@ -233,13 +220,6 @@
             }
             .nav-links-container.active { right: 0; }
             .navbar-left { display: none; }
-        }
-
-        @media (max-width: 768px) {
-            .footer-content { grid-template-columns: 1fr; gap: 30px; }
-            .heading { font-size: 28px; }
-            .footer-left-column { align-items: center; }
-            .custom-copyright { text-align: center; }
         }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -284,9 +264,8 @@
 
         <div id="formWrapper" class="form-container">
             <form id="queryForm">
-                <div id="errorMessage">رمز الخدمة أو رقم الهوية غير صحيح.</div>
-                <input type="text" id="serviceCode" class="form-control" placeholder="رمز الخدمة" required>
-                <input type="text" id="idNumber" class="form-control" placeholder="رقم الهوية / الإقامة" required>
+                <input type="text" id="serviceCode" class="form-control" placeholder="رمز الخدمة" maxlength="14" required>
+                <input type="text" id="idNumber" class="form-control" placeholder="رقم الهوية / الإقامة" maxlength="10" inputmode="numeric" required>
                 
                 <div class="button-wrapper">
                     <button type="submit" class="btn-submit" id="submitBtn">استعلام</button>
@@ -299,31 +278,31 @@
             <div class="card-vertical-layout">
                 <div class="info-group">
                     <span class="info-label">الاسم:</span>
-                    <span class="info-value">عبدالرحمن بن عطيه الزهراني</span>
+                    <span class="info-value" id="res-name"></span>
                 </div>
                 <div class="info-group">
                     <span class="info-label">تاريخ إصدار تقرير الإجازة:</span>
-                    <span class="info-value">2026-01-19</span>
+                    <span class="info-value" id="res-date-issue"></span>
                 </div>
                 <div class="info-group">
                     <span class="info-label">تبدأ من:</span>
-                    <span class="info-value">2026-01-19</span>
+                    <span class="info-value" id="res-start"></span>
                 </div>
                 <div class="info-group">
                     <span class="info-label">وحتى:</span>
-                    <span class="info-value">2026-02-18</span>
+                    <span class="info-value" id="res-end"></span>
                 </div>
                 <div class="info-group">
                     <span class="info-label">المدة بالأيام:</span>
-                    <span class="info-value">30</span>
+                    <span class="info-value" id="res-duration"></span>
                 </div>
                 <div class="info-group">
                     <span class="info-label">اسم الطبيب:</span>
-                    <span class="info-value">خالد عالي بركي</span>
+                    <span class="info-value" id="res-doctor"></span>
                 </div>
                 <div class="info-group">
                     <span class="info-label">المسمى الوظيفي:</span>
-                    <span class="info-value">اخصائي</span>
+                    <span class="info-value" id="res-job"></span>
                 </div>
             </div>
         </div>
@@ -368,7 +347,7 @@
                 </div>
 
                 <div class="custom-copyright">
-                    <span>منصة صحة معتمدة من قبل وزارة الصحة © 2026</span>
+                    <span>منصة صحة معتمدة من قبل وزارة الصحة © 2026</span><br>
                     <span>سياسة الخصوصية وشروط الاستخدام | دليل الاستخدام</span>
                 </div>
             </div>
@@ -379,18 +358,19 @@
         document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.getElementById('mobileMenu');
             const navLinks = document.getElementById('navLinks');
+            const idInput = document.getElementById('idNumber');
+
+            // منع إدخال الحروف في خانة الهوية
+            idInput.addEventListener('input', function() {
+                this.value = this.value.replace(/[^0-9]/g, '');
+            });
 
             menuToggle.addEventListener('click', () => {
                 navLinks.classList.toggle('active');
-                const spans = menuToggle.querySelectorAll('span');
-                spans[0].style.transform = navLinks.classList.contains('active') ? 'rotate(45deg) translate(5px, 6px)' : 'none';
-                spans[1].style.opacity = navLinks.classList.contains('active') ? '0' : '1';
-                spans[2].style.transform = navLinks.classList.contains('active') ? 'rotate(-45deg) translate(5px, -6px)' : 'none';
             });
 
             const form = document.getElementById('queryForm');
             const submitBtn = document.getElementById('submitBtn');
-            const errorMessage = document.getElementById('errorMessage');
             
             const correctServiceCode = "GSL25050755014";
             const correctIdNumber = "1134148921";
@@ -398,23 +378,37 @@
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 const codeValue = document.getElementById('serviceCode').value.trim();
-                const idValue = document.getElementById('idNumber').value.trim();
+                const idValue = idInput.value.trim();
 
-                if (codeValue === correctServiceCode && idValue === correctIdNumber) {
-                    errorMessage.style.display = 'none';
-                    submitBtn.disabled = true;
-                    submitBtn.innerText = 'جاري البحث...';
+                submitBtn.disabled = true;
+                submitBtn.innerText = 'جاري البحث...';
 
-                    setTimeout(() => {
-                        document.getElementById('formWrapper').style.display = 'none';
-                        document.getElementById('resultCard').style.display = 'block';
-                        document.getElementById('actionButtons').style.display = 'flex';
-                        window.scrollTo({top: 0, behavior: 'smooth'});
-                    }, 1200);
-                } else {
-                    errorMessage.style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('formWrapper').style.display = 'none';
+                    const resultCard = document.getElementById('resultCard');
+                    
+                    if (codeValue === correctServiceCode && idValue === correctIdNumber) {
+                        document.getElementById('res-name').innerText = "عبدالرحمن بن عطيه الزهراني";
+                        document.getElementById('res-date-issue').innerText = "2026-01-19";
+                        document.getElementById('res-start').innerText = "2026-01-19";
+                        document.getElementById('res-end').innerText = "2026-02-18";
+                        document.getElementById('res-duration').innerText = "30";
+                        document.getElementById('res-doctor').innerText = "خالد عالي بركي";
+                        document.getElementById('res-job').innerText = "اخصائي";
+                    } else {
+                        document.getElementById('res-name').innerText = "-";
+                        document.getElementById('res-date-issue').innerText = "2026-01-19";
+                        document.getElementById('res-start').innerText = "2026-01-19";
+                        document.getElementById('res-end').innerText = "2026-02-18";
+                        document.getElementById('res-duration').innerText = "30";
+                        document.getElementById('res-doctor').innerText = "-";
+                        document.getElementById('res-job').innerText = "-";
+                    }
+
+                    resultCard.style.display = 'block';
+                    document.getElementById('actionButtons').style.display = 'flex';
                     window.scrollTo({top: 0, behavior: 'smooth'});
-                }
+                }, 1000);
             });
         });
     </script>
